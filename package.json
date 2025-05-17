@@ -39,7 +39,10 @@
     "build:src": "swc src --out-dir dist --ignore '**/*.test.ts' --strip-leading-paths",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.lib.json",
     "build": "npm run build:src && npm run build:types",
+    "prerelease:local": "[ -f package-lock.json ] || npm install --no-workspaces --package-lock-only",
+    "release:local": "semantic-release --no-ci --dry-run",
     "----UTIL": "",
+    "prepare": "git config --local core.hooksPath .githook",
     "format": "eslint --fix .",
     "----CODE-ANALYSIS": "",
     "lint": "eslint .",
@@ -53,11 +56,19 @@
     "@asd14/eslint-config": "^13.0.0",
     "@asd14/prettier-config": "^1.0.2",
     "@asd14/ts-config": "^1.0.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/git": "^10.0.1",
     "@swc/cli": "^0.7.7",
     "@swc/core": "^1.11.24",
     "@types/node": "^22.15.18",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "eslint": "^9.27.0",
     "prettier": "^3.5.3",
+    "semantic-release": "^24.2.4",
     "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0"
   }
 }
