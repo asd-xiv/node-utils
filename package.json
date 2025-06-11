@@ -26,32 +26,32 @@
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs",
+      "require": "./dist/cjs/index.js",
       "types": "./dist/types/index.d.ts"
     },
     "./colors": {
       "import": "./dist/esm/colors.js",
-      "require": "./dist/cjs/colors.cjs",
+      "require": "./dist/cjs/colors.js",
       "types": "./dist/types/colors.d.ts"
     },
     "./fetch": {
       "import": "./dist/esm/fetch.js",
-      "require": "./dist/cjs/fetch.cjs",
+      "require": "./dist/cjs/fetch.js",
       "types": "./dist/types/fetch.d.ts"
     },
     "./fs": {
       "import": "./dist/esm/fs.js",
-      "require": "./dist/cjs/fs.cjs",
+      "require": "./dist/cjs/fs.js",
       "types": "./dist/types/fs.d.ts"
     },
     "./logger": {
       "import": "./dist/esm/logger/index.js",
-      "require": "./dist/cjs/logger/index.cjs",
+      "require": "./dist/cjs/logger/index.js",
       "types": "./dist/types/logger/index.d.ts"
     },
     "./time": {
       "import": "./dist/esm/time.js",
-      "require": "./dist/cjs/time.cjs",
+      "require": "./dist/cjs/time.js",
       "types": "./dist/types/time.d.ts"
     },
     "./package.json": "./package.json"
@@ -59,7 +59,7 @@
   "scripts": {
     "---BUILD": "",
     "build:src:esm": "swc src --out-dir dist/esm --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-mjs",
-    "build:src:cjs": "swc src --out-dir dist/cjs --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-cjs --out-file-extension cjs",
+    "build:src:cjs": "swc src --out-dir dist/cjs --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-cjs",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.lib.json",
     "build": "npm run build:src:esm && npm run build:src:cjs && npm run build:types",
     "prerelease:local": "[ -f package-lock.json ] || npm install --no-workspaces --package-lock-only",
