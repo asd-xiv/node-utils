@@ -75,6 +75,7 @@
     "typecheck": "npm run typecheck:code && npm run typecheck:configs"
   },
   "dependencies": {
+    "@swc/helpers": "^0.5.17",
     "yocto-spinner": "^0.2.3"
   },
   "devDependencies": {
