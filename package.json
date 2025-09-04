@@ -49,10 +49,15 @@
       "require": "./dist/cjs/logger/index.js",
       "types": "./dist/types/logger/index.d.ts"
     },
+    "./math": {
+      "import": "./dist/esm/math/index.js",
+      "require": "./dist/cjs/math/index.js",
+      "types": "./dist/types/math/index.d.ts"
+    },
     "./time": {
-      "import": "./dist/esm/time.js",
-      "require": "./dist/cjs/time.js",
-      "types": "./dist/types/time.d.ts"
+      "import": "./dist/esm/time/index.js",
+      "require": "./dist/cjs/time/index.js",
+      "types": "./dist/types/time/index.d.ts"
     },
     "./package.json": "./package.json"
   },
@@ -69,30 +74,33 @@
     "format": "eslint --fix .",
     "----CODE-ANALYSIS": "",
     "lint": "eslint .",
-    "unit-test": "jest --coverage",
+    "unit-test": "node --import=tsx --test \"src/**/*.test.ts\"",
+    "watch:unit-test": "node --import=tsx --watch --test \"src/**/*.test.ts\"",
     "typecheck:code": "tsc --noEmit --project tsconfig.lib.json",
     "typecheck:configs": "tsc --noEmit --project tsconfig.dev.json",
-    "typecheck": "npm run typecheck:code && npm run typecheck:configs"
+    "typecheck:test": "tsc --noEmit --project tsconfig.test.json",
+    "typecheck": "npm run typecheck:code && npm run typecheck:configs && npm run typecheck:test"
   },
   "dependencies": {
     "@swc/helpers": "^0.5.17",
-    "yocto-spinner": "^0.2.3"
+    "yocto-spinner": "^1.0.0"
   },
   "devDependencies": {
-    "@asd14/eslint-config": "^13.0.0",
-    "@asd14/prettier-config": "^1.0.2",
-    "@asd14/ts-config": "^1.0.1",
+    "@asd14/eslint-config": "^14.2.0",
+    "@asd14/prettier-config": "^1.1.0",
+    "@asd14/ts-config": "^1.1.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@semantic-release/git": "^10.0.1",
-    "@swc/cli": "^0.7.7",
-    "@swc/core": "^1.12.0",
-    "@types/node": "^24.0.0",
-    "conventional-changelog-conventionalcommits": "^9.0.0",
-    "eslint": "^9.28.0",
-    "prettier": "^3.5.3",
-    "semantic-release": "^24.2.5",
-    "typescript": "^5.8.3"
+    "@swc/cli": "^0.7.8",
+    "@swc/core": "^1.13.5",
+    "@types/node": "^24.3.0",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "eslint": "^9.34.0",
+    "prettier": "^3.6.2",
+    "semantic-release": "^24.2.7",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   },
   "engines": {
     "node": "^20.19.0 || ^22.12.0"
