@@ -30,19 +30,19 @@
       "types": "./dist/types/index.d.ts"
     },
     "./colors": {
-      "import": "./dist/esm/colors.js",
-      "require": "./dist/cjs/colors.js",
-      "types": "./dist/types/colors.d.ts"
+      "import": "./dist/esm/colors/index.js",
+      "require": "./dist/cjs/colors/index.js",
+      "types": "./dist/types/colors/index.d.ts"
     },
     "./fetch": {
-      "import": "./dist/esm/fetch.js",
-      "require": "./dist/cjs/fetch.js",
-      "types": "./dist/types/fetch.d.ts"
+      "import": "./dist/esm/fetch/index.js",
+      "require": "./dist/cjs/fetch/index.js",
+      "types": "./dist/types/fetch/index.d.ts"
     },
     "./fs": {
-      "import": "./dist/esm/fs.js",
-      "require": "./dist/cjs/fs.js",
-      "types": "./dist/types/fs.d.ts"
+      "import": "./dist/esm/fs/index.js",
+      "require": "./dist/cjs/fs/index.js",
+      "types": "./dist/types/fs/index.d.ts"
     },
     "./logger": {
       "import": "./dist/esm/logger/index.js",
@@ -58,6 +58,11 @@
       "import": "./dist/esm/time/index.js",
       "require": "./dist/cjs/time/index.js",
       "types": "./dist/types/time/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/esm/types.js",
+      "require": "./dist/cjs/types.js",
+      "types": "./dist/types.d.ts"
     },
     "./package.json": "./package.json"
   },
