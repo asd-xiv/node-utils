@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvmrc.outputs.node_version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -66,7 +66,7 @@ jobs:
         run: npm run lint
 
   typecheck:
-    name: Type Check
+    name: Typecheck
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -87,9 +87,31 @@ jobs:
       - name: Run type checking
         run: npm run typecheck
 
+  unit-test:
+    name: Unit Test
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ needs.setup.outputs.node-version }}
+
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ needs.setup.outputs.cache-key }}
+
+      - name: Run unit testing
+        run: npm run unit-test
+
   release:
     name: Release
-    needs: [setup, lint, typecheck]
+    needs: [setup, lint, typecheck, unit-test]
     runs-on: ubuntu-latest
     permissions:
       contents: write
