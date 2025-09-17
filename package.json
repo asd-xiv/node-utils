@@ -54,6 +54,11 @@
       "require": "./dist/cjs/math/index.js",
       "types": "./dist/types/math/index.d.ts"
     },
+    "./network": {
+      "import": "./dist/esm/network/index.js",
+      "require": "./dist/cjs/network/index.js",
+      "types": "./dist/types/network/index.d.ts"
+    },
     "./time": {
       "import": "./dist/esm/time/index.js",
       "require": "./dist/cjs/time/index.js",
