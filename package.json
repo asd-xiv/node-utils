@@ -54,6 +54,11 @@
       "require": "./dist/cjs/network/index.js",
       "types": "./dist/types/network/index.d.ts"
     },
+    "./promise": {
+      "import": "./dist/esm/promise/index.js",
+      "require": "./dist/cjs/promise/index.js",
+      "types": "./dist/types/promise/index.d.ts"
+    },
     "./terminal": {
       "import": "./dist/esm/terminal/index.js",
       "require": "./dist/cjs/terminal/index.js",
