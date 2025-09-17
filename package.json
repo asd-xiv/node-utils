@@ -78,6 +78,7 @@
   },
   "scripts": {
     "---BUILD": "",
+    "build:lock": "pu git-has-changed package.json --since HEAD~1 && npm install --no-workspaces --package-lock-only",
     "build:src:esm": "swc src --out-dir dist/esm --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-mjs",
     "build:src:cjs": "swc src --out-dir dist/cjs --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-cjs",
     "build:types": "tsc --emitDeclarationOnly --project tsconfig.lib.json",
@@ -101,7 +102,7 @@
     "yocto-spinner": "^1.0.0"
   },
   "devDependencies": {
-    "@asd14/eslint-config": "^14.2.1",
+    "@asd14/eslint-config": "^14.4.0",
     "@asd14/prettier-config": "^1.1.0",
     "@asd14/ts-config": "^1.1.0",
     "@commitlint/cli": "^19.8.1",
