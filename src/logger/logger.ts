@@ -1,5 +1,6 @@
 import yoctoSpinner from "yocto-spinner"
 import { fgRed, fgYellow, fgGray, fgGreen, combine } from "../colors/colors.js"
+import { icons } from "../terminal/icons.js"
 import { formatHRTime } from "../time/format-hr-time.js"
 
 // Detect if running in a CI environment
@@ -153,6 +154,7 @@ type Logger = {
   warn: (message: string, variables?: Record<string, unknown>) => void
   info: (message: string, variables?: Record<string, unknown>) => void
   success: (message: string, variables?: Record<string, unknown>) => void
+  tadaa: (data: { title: string; message?: string; note?: string }) => void
   spinner: {
     start: (message: string) => void
     stop: (
@@ -194,6 +196,35 @@ const buildLogger = ({
     warn: log({ type: "warning", namespace, level }),
     info: log({ type: "info", namespace, level }),
     success: log({ type: "success", namespace, level }),
+    tadaa: ({ title, message = "", note = "" }) => {
+      if (!LEVELS_TO_TYPES[level].includes("success")) {
+        return
+      }
+
+      const termWidth = process.stdout.columns || 80
+      const contentLength = Math.max(
+        title.length,
+        ...(message ? message.split("\n").map(item => item.length) : []),
+        ...(note ? note.split("\n").map(item => item.length) : [])
+      )
+      const messageBorderLength = Math.min(termWidth, contentLength + 25)
+      const border = icons.lineDouble.repeat(messageBorderLength)
+      const star = combine("fgYellow", "bold")(icons.star)
+      const titleStyled = combine("fgGreen", "bold")(title)
+      const pointer = combine("fgCyan", "bold")(icons.triangleRight)
+
+      console.log(combine("fgCyan", "bold")(border))
+      console.log(
+        `${star} ${combine("fgWhite", "bold")("TADAA!")} ${star} ${titleStyled}`
+      )
+      if (message.length !== 0) {
+        console.log(`${pointer} ${message}`)
+      }
+      if (note.length !== 0) {
+        console.log(fgGray(`${icons.triangleRight} ${note}`))
+      }
+      console.log(combine("fgCyan", "bold")(border))
+    },
     spinner: {
       start: message => {
         spinnerLoadingMessage = `${message}...`
