@@ -6,15 +6,29 @@ type FetchJSONOptions = Omit<RequestInit, "body" | "headers"> & {
   /** Request body as a JSON object */
   body?: Record<string, unknown>
   /** Request query parameters as a JSON object */
-  queryParameters?: Record<string, string>
+  query?: Record<string, unknown>
   /** Custom request headers */
-  headers?: Record<string, string>
+  headers?: Record<string, string | undefined>
 }
 
 /**
  * Options for fetchJSON controlling behavior like aborting requests or handling redirects
  */
 type FetchJSONControlOptions = Pick<RequestInit, "signal" | "mode" | "redirect">
+
+const buildQueryString = (input: Record<string, unknown> = {}): string => {
+  const entries = Object.entries(input)
+
+  if (entries.length === 0) {
+    return ""
+  }
+
+  const nonEmptyQueryParameters = entries
+    .filter(([_, value]) => value !== undefined)
+    .map(([key, value]) => [key, String(value)] as [string, string])
+
+  return `?${new URLSearchParams(nonEmptyQueryParameters).toString()}`
+}
 
 /**
  * Fetches JSON data from an API endpoint and parses the response
@@ -44,11 +58,9 @@ type FetchJSONControlOptions = Pick<RequestInit, "signal" | "mode" | "redirect">
  */
 const fetchJSON = async <T>(
   endpoint: string,
-  { method, queryParameters, headers, body, ...options }: FetchJSONOptions = {}
+  { method, query, headers, body, ...options }: FetchJSONOptions = {}
 ): Promise<T> => {
-  const queryString = queryParameters
-    ? `?${new URLSearchParams(queryParameters).toString()}`
-    : ""
+  const queryString = buildQueryString(query)
   const response = await fetch(`${endpoint}${queryString}`, {
     method,
     headers: {
@@ -60,13 +72,7 @@ const fetchJSON = async <T>(
   })
 
   if (!response.ok) {
-    throw new Error(`Network error: ${response.status} ${response.statusText}`)
-  }
-
-  if (response.status >= 400 && response.status < 500) {
-    throw new Error(
-      `Application Server error: ${response.status} ${response.statusText}`
-    )
+    throw new Error(`HTTP error: ${response.status} ${response.statusText}`)
   }
 
   return response.json() as Promise<T>
