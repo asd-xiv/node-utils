@@ -34,11 +34,6 @@
       "require": "./dist/cjs/colors/index.js",
       "types": "./dist/types/colors/index.d.ts"
     },
-    "./fetch": {
-      "import": "./dist/esm/fetch/index.js",
-      "require": "./dist/cjs/fetch/index.js",
-      "types": "./dist/types/fetch/index.d.ts"
-    },
     "./fs": {
       "import": "./dist/esm/fs/index.js",
       "require": "./dist/cjs/fs/index.js",
@@ -96,7 +91,7 @@
     "yocto-spinner": "^1.0.0"
   },
   "devDependencies": {
-    "@asd14/eslint-config": "^14.2.0",
+    "@asd14/eslint-config": "^14.2.1",
     "@asd14/prettier-config": "^1.1.0",
     "@asd14/ts-config": "^1.1.0",
     "@commitlint/cli": "^19.8.1",
@@ -104,11 +99,11 @@
     "@semantic-release/git": "^10.0.1",
     "@swc/cli": "^0.7.8",
     "@swc/core": "^1.13.5",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.5.1",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "semantic-release": "^24.2.7",
+    "semantic-release": "^24.2.8",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   },

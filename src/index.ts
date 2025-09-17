@@ -1,5 +1,4 @@
 export * from "./colors/index.js"
-export * from "./fetch/index.js"
 export * from "./fs/index.js"
 export * from "./logger/index.js"
 export * from "./math/index.js"
