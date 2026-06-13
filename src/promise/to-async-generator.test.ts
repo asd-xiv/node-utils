@@ -1,3 +1,4 @@
+import { deepStrictEqual } from "node:assert"
 import { equal, deepEqual, strictEqual } from "node:assert/strict"
 import { describe, test } from "node:test"
 
@@ -67,30 +68,21 @@ await describe("toAsyncGenerator :: Convert promise arrays to async generators",
   })
 
   await test("given [multiple promises resolving in different order] should [yield results in completion order]", async () => {
-    // Promises resolve in order: fast, medium, slow
     const promises = [
       delay(50, "slow"), // index 0
       delay(10, "fast"), // index 1
       delay(30, "medium"), // index 2
     ]
-
     const results = []
-
     for await (const result of toAsyncGenerator(promises)) {
       results.push(result)
     }
 
-    equal(results.length, 3)
-
-    // Should yield in completion order (fast, medium, slow) with correct indices
-    equal(results[0]?.value, "fast")
-    equal(results[0].index, 1)
-
-    equal(results[1]?.value, "medium")
-    equal(results[1].index, 2)
-
-    equal(results[2]?.value, "slow")
-    equal(results[2].index, 0)
+    deepStrictEqual(results, [
+      { value: "fast", index: 1 },
+      { value: "medium", index: 2 },
+      { value: "slow", index: 0 },
+    ])
   })
 
   await test("given [mix of fulfilled and rejected promises] should [yield all results with correct status]", async () => {
@@ -102,7 +94,6 @@ await describe("toAsyncGenerator :: Convert promise arrays to async generators",
     ]
 
     const results = []
-
     for await (const result of toAsyncGenerator(promises)) {
       results.push(result)
     }

@@ -24,13 +24,6 @@ type ToAsyncGenerator = <T>(
  * @param options Configuration options
  * @returns AsyncGenerator that yields results with their original indices
  *
- * @remarks
- * **Promise cancellation limitation:** When aborted via AbortSignal, this function stops
- * iterating and throws, but the original promises cannot be cancelled as JavaScript promises
- * lack built-in cancellation. In-flight promises continue executing in the background.
- * For true cancellation, use APIs that accept AbortSignal (like fetch) or implement
- * custom cancellation patterns within your promise-creating code.
- *
  * @example
  * ```ts
  * const promises = [
@@ -48,6 +41,12 @@ type ToAsyncGenerator = <T>(
  * }
  * ```
  *
+ * @remarks
+ * **Promise cancellation limitation:** When aborted via AbortSignal, this function stops
+ * iterating and throws, but the original promises cannot be cancelled as JavaScript promises
+ * lack built-in cancellation. In-flight promises continue executing in the background.
+ * For true cancellation, use APIs that accept AbortSignal (like fetch) or implement
+ * custom cancellation patterns within your promise-creating code.
  */
 const toAsyncGenerator: ToAsyncGenerator = async function* (
   promises,

@@ -24,7 +24,7 @@ const readFileAsJSON = async <T>(path: string): Promise<T> => {
   try {
     const content = await readFile(path, "utf-8")
 
-    return JSON.parse(content) as unknown as T
+    return JSON.parse(content) as T
   } catch (error) {
     if (error instanceof SyntaxError) {
       throw new TypeError(`Failed to parse JSON: ${error.message}`)
@@ -57,7 +57,7 @@ const readFileAsJSONSync = <T>(path: string): T => {
   try {
     const content = readFileSync(path, "utf-8")
 
-    return JSON.parse(content) as unknown as T
+    return JSON.parse(content) as T
   } catch (error) {
     if (error instanceof SyntaxError) {
       throw new TypeError(`Failed to parse JSON: ${error.message}`)

@@ -42,12 +42,6 @@ const getRandomPort = (): Promise<number> =>
  *
  * @throws {Error} When no port is available in the search range (startFrom to startFrom+1000)
  *
- * @remarks
- * **Race condition warning:** There is an inherent race condition between when this function
- * returns a port and when your application binds to it. Another process might claim the port
- * in that brief window. This is unavoidable at the OS level. Handle "address already in use"
- * errors in your application and retry if needed.
- *
  * @example
  * // Let OS assign any available port
  * const port = await getFreePort()
@@ -55,6 +49,11 @@ const getRandomPort = (): Promise<number> =>
  * // Search starting from port 3000
  * const port = await getFreePort(3000)
  *
+ * @remarks
+ * **Race condition warning:** There is an inherent race condition between when this function
+ * returns a port and when your application binds to it. Another process might claim the port
+ * in that brief window. This is unavoidable at the OS level. Handle "address already in use"
+ * errors in your application and retry if needed.
  */
 const getFreePort = async (startFrom?: number): Promise<number> => {
   if (startFrom === undefined) {
