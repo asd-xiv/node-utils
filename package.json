@@ -2,7 +2,8 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@asd14/node-utils",
   "version": "2.0.0",
-  "description": "Pure Node.js functions for various common tasks and utilities",
+  "description": "Node.js pure functions for common tasks",
+  "license": "MIT",
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
@@ -11,114 +12,117 @@
     "type": "git",
     "url": "git+https://github.com/asd-xiv/node-utils.git"
   },
-  "tags": [
-    "node",
-    "utils",
-    "helpers",
-    "functional",
-    "pure-functions",
-    "typescript"
-  ],
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt"
+  },
   "files": [
-    "dist"
+    "/dist"
   ],
+  "nx": {
+    "projectType": "library",
+    "tags": [
+      "type:library",
+      "target:node"
+    ]
+  },
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
     "./colors": {
-      "import": "./dist/esm/colors/index.js",
-      "require": "./dist/cjs/colors/index.js",
-      "types": "./dist/types/colors/index.d.ts"
+      "import": "./dist/colors/index.js",
+      "default": "./dist/colors/index.js",
+      "types": "./dist/colors/index.d.ts"
     },
     "./fs": {
-      "import": "./dist/esm/fs/index.js",
-      "require": "./dist/cjs/fs/index.js",
-      "types": "./dist/types/fs/index.d.ts"
-    },
-    "./logger": {
-      "import": "./dist/esm/logger/index.js",
-      "require": "./dist/cjs/logger/index.js",
-      "types": "./dist/types/logger/index.d.ts"
+      "import": "./dist/fs/index.js",
+      "default": "./dist/fs/index.js",
+      "types": "./dist/fs/index.d.ts"
     },
     "./math": {
-      "import": "./dist/esm/math/index.js",
-      "require": "./dist/cjs/math/index.js",
-      "types": "./dist/types/math/index.d.ts"
+      "import": "./dist/math/index.js",
+      "default": "./dist/math/index.js",
+      "types": "./dist/math/index.d.ts"
     },
     "./network": {
-      "import": "./dist/esm/network/index.js",
-      "require": "./dist/cjs/network/index.js",
-      "types": "./dist/types/network/index.d.ts"
+      "import": "./dist/network/index.js",
+      "default": "./dist/network/index.js",
+      "types": "./dist/network/index.d.ts"
     },
     "./promise": {
-      "import": "./dist/esm/promise/index.js",
-      "require": "./dist/cjs/promise/index.js",
-      "types": "./dist/types/promise/index.d.ts"
+      "import": "./dist/promise/index.js",
+      "default": "./dist/promise/index.js",
+      "types": "./dist/promise/index.d.ts"
     },
     "./terminal": {
-      "import": "./dist/esm/terminal/index.js",
-      "require": "./dist/cjs/terminal/index.js",
-      "types": "./dist/types/terminal/index.d.ts"
+      "import": "./dist/terminal/index.js",
+      "default": "./dist/terminal/index.js",
+      "types": "./dist/terminal/index.d.ts"
     },
     "./time": {
-      "import": "./dist/esm/time/index.js",
-      "require": "./dist/cjs/time/index.js",
-      "types": "./dist/types/time/index.d.ts"
+      "import": "./dist/time/index.js",
+      "default": "./dist/time/index.js",
+      "types": "./dist/time/index.d.ts"
     },
     "./types": {
-      "import": "./dist/esm/types.js",
-      "require": "./dist/cjs/types.js",
-      "types": "./dist/types.d.ts"
+      "import": "./dist/index.types.js",
+      "default": "./dist/index.types.js",
+      "types": "./dist/index.types.d.ts"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "---BUILD": "",
-    "build:lock": "pu git-has-changed package.json --since HEAD~1 && npm install --no-workspaces --package-lock-only",
-    "build:src:esm": "swc src --out-dir dist/esm --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-mjs",
-    "build:src:cjs": "swc src --out-dir dist/cjs --ignore '**/*.test.ts' --strip-leading-paths --config-file .swcrc-cjs",
-    "build:types": "tsc --emitDeclarationOnly --project tsconfig.lib.json",
-    "build": "npm run build:src:esm && npm run build:src:cjs && npm run build:types",
-    "prerelease:local": "[ -f package-lock.json ] || npm install --no-workspaces --package-lock-only",
-    "release:local": "semantic-release --no-ci --dry-run",
     "----UTIL": "",
     "prepare": "git config --local core.hooksPath .githook",
     "format": "eslint --fix .",
-    "----CODE-ANALYSIS": "",
-    "lint": "eslint .",
-    "unit-test": "node --import=tsx --test \"src/**/*.test.ts\"",
-    "watch:unit-test": "node --import=tsx --watch --test \"src/**/*.test.ts\"",
-    "typecheck:code": "tsc --noEmit --project tsconfig.lib.json",
-    "typecheck:configs": "tsc --noEmit --project tsconfig.dev.json",
-    "typecheck:test": "tsc --noEmit --project tsconfig.test.json",
-    "typecheck": "npm run typecheck:code && npm run typecheck:configs && npm run typecheck:test"
+    "----BUNDLE": "",
+    "build:code": "swc src -d dist --strip-leading-paths",
+    "build:types": "tsc --declaration --emitDeclarationOnly --project ./.tsconfig/code.json",
+    "prebuild": "rm -rf dist/* node_modules/.tmp/*.tsbuildinfo",
+    "build": "npm run build:code && npm run build:types",
+    "----LINT": "",
+    "lint": "eslint --quiet .",
+    "typecheck:code": "tsc --noEmit --project ./.tsconfig/code.json",
+    "typecheck:tests": "tsc --noEmit --project ./.tsconfig/tests.json",
+    "typecheck:other": "tsc --noEmit --project ./.tsconfig/other.json",
+    "typecheck": "npm run typecheck:code && npm run typecheck:tests && npm run typecheck:other",
+    "----TEST": "",
+    "test:code": "TSX_TSCONFIG_PATH=.tsconfig/tests.json node --import tsx --test 'src/**/*.test.ts'",
+    "test:types": "tstyche",
+    "test": "npm run test:code && npm run test:types",
+    "coverage": "c8 --100 --exclude='src/**/*.test.ts' npm run test:code",
+    "unit-test": "npm run test:code",
+    "type-test": "npm run test:types",
+    "watch:unit-test": "TSX_TSCONFIG_PATH=.tsconfig/tests.json node --import tsx --watch --test 'src/**/*.test.ts'",
+    "----PUBLISH": "",
+    "release": "semantic-release"
   },
-  "dependencies": {
-    "@swc/helpers": "^0.5.17",
-    "yocto-spinner": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@asd14/eslint-config": "^14.4.0",
-    "@asd14/prettier-config": "^1.1.0",
-    "@asd14/ts-config": "^1.1.0",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@asd14/eslint-config": "^15.4.0",
+    "@asd14/eslint-plugin": "^3.3.0",
+    "@asd14/prettier-config": "^1.4.0",
+    "@asd14/ts-config": "^1.5.0",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@swc/cli": "^0.7.8",
-    "@swc/core": "^1.13.5",
-    "@types/node": "^24.5.1",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "eslint": "^9.35.0",
-    "prettier": "^3.6.2",
-    "semantic-release": "^24.2.8",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "^1.15.41",
+    "c8": "^11.0.0",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "eslint": "^9.39.2",
+    "prettier": "^3.8.4",
+    "semantic-release": "^25.0.5",
+    "tstyche": "^7.2.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
   },
+  "peerDependencies": {},
   "engines": {
-    "node": "^20.19.0 || ^22.12.0"
+    "node": ">=22.0.0"
   }
 }
