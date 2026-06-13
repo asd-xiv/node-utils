@@ -3,7 +3,7 @@
 
 # @asd14/node-utils
 
-> Pure Node.js functions for various common tasks and utilities.
+> Node.js pure functions for common tasks.
 
 <!-- vim-markdown-toc GFM -->
 
