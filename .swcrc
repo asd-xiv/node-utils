@@ -1,0 +1,22 @@
+{
+  "$schema": "https://swc.rs/schema.json",
+  "minify": false,
+  "sourceMaps": false,
+  "module": {
+    "type": "es6",
+    "resolveFully": true
+  },
+  "exclude": [".*\\.(test|tst)\\.ts$"],
+  "jsc": {
+    "target": "es2022",
+    "externalHelpers": false,
+    "baseUrl": ".",
+    "experimental": {
+      "keepImportAssertions": true
+    },
+    "parser": {
+      "syntax": "typescript",
+      "dynamicImport": true
+    }
+  }
+}
