@@ -79,9 +79,9 @@ await describe("toAsyncGenerator :: Convert promise arrays to async generators",
     }
 
     deepStrictEqual(results, [
-      { value: "fast", index: 1 },
-      { value: "medium", index: 2 },
-      { value: "slow", index: 0 },
+      { value: "fast", status: "fulfilled", index: 1, error: undefined },
+      { value: "medium", status: "fulfilled", index: 2, error: undefined },
+      { value: "slow", status: "fulfilled", index: 0, error: undefined },
     ])
   })
 
