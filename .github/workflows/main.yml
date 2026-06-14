@@ -49,6 +49,9 @@ jobs:
           path: node_modules
           key: node-modules-${{ needs.install-dependencies.outputs.cache-key }}
 
+      - name: Build
+        run: npm run build
+
       - name: Release
         env:
           # Auth for GitHub REST API (create release, comment on issues/PRs)
