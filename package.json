@@ -17,7 +17,7 @@
     "url": "https://github.com/andreidmt"
   },
   "files": [
-    "/dist"
+    "dist"
   ],
   "nx": {
     "projectType": "library",
