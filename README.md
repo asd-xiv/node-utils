@@ -7,17 +7,15 @@
 
 <!-- vim-markdown-toc GFM -->
 
-- [Installation](#installation)
-- [License](#license)
+- [Install](#install)
+- [Use](#use)
 
 <!-- vim-markdown-toc -->
 
-## Installation
+## Install
 
 ```sh
 npm install @asd14/node-utils
 ```
 
-## License
-
-MIT
+## Use
