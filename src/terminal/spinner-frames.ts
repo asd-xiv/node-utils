@@ -2,8 +2,6 @@
  * Spinner configurations from cli-spinners
  *
  * @see https://github.com/sindresorhus/cli-spinners
- *
- * @see https://raw.githubusercontent.com/sindresorhus/cli-spinners/main/spinners.json
  */
 const spinners = {
   dots: {

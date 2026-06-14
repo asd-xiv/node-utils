@@ -1,9 +1,9 @@
-[![Release](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml)
+[![Release](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/asd-xiv/node-utils/actions/workflows/main.yml)
 [![npm version](https://img.shields.io/npm/v/@asd14/node-utils.svg)](https://www.npmjs.com/package/@asd14/node-utils)
 
 # @asd14/node-utils
 
-> Node.js pure functions for common tasks.
+> Node.js pure functions for common domain-agnostic tasks.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -15,7 +15,7 @@
 ## Installation
 
 ```sh
-npm install --save-dev @asd14/node-utils
+npm install @asd14/node-utils
 ```
 
 ## License

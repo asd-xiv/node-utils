@@ -277,7 +277,7 @@ const specialFallbackSymbols = {
   oneTenth: "1/10",
 }
 
-// Symbols only available if user is using a NerdFont enhanced font
+// NerdFont only symbols
 const nerdFontSymbols = {
   magnifier: "󰍉",
   lightbulb: "",

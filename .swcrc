@@ -6,7 +6,7 @@
     "type": "es6",
     "resolveFully": true
   },
-  "exclude": [".*\\.(test|tst)\\.ts$"],
+  "exclude": [".*\\.test\\.ts$", ".*\\.tst\\.ts$"],
   "jsc": {
     "target": "es2022",
     "externalHelpers": false,
