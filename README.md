@@ -1,4 +1,4 @@
-[![Release](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/asd-xiv/node-utils/actions/workflows/main.yml)
+[![Release](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/asd-xiv/node-utils/actions/workflows/release.yml)
 [![npm version](https://img.shields.io/npm/v/@asd14/node-utils.svg)](https://www.npmjs.com/package/@asd14/node-utils)
 ![node](https://img.shields.io/node/v/@asd14/node-utils)
 
