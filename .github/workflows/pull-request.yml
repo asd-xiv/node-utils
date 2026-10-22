@@ -1,0 +1,38 @@
+name: Check
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  detect-secrets:
+    name: Detect Secrets
+    uses: ./.github/workflows/_detect-secrets.yml
+
+  lint-title:
+    name: Conventional Commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Validate PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: echo "$PR_TITLE" | npx commitlint
+
+  code-qa:
+    name: Code QA
+    needs: [detect-secrets]
+    uses: ./.github/workflows/_code-qa.yml
