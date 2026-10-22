@@ -13,7 +13,7 @@ await describe("truncate :: Truncate a number to a specified number of decimal p
   })
 
   await test("given [very small number] should [truncate correctly]", () => {
-    equal(truncate(0.123_456_789, 3), 0.123)
+    equal(truncate(0.123456789, 3), 0.123)
   })
 
   await test("given [zero] should [return zero]", () => {
