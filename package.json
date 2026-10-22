@@ -74,12 +74,13 @@
     "----UTILS": "",
     "prepare": "git config --local core.hooksPath .githook",
     "format": "eslint --fix .",
-    "clear:dist": "rm -rf dist/*",
-    "clear:ts-cache": "rm -f node_modules/.tmp/*.tsbuildinfo",
+    "clean:dist": "mkdir -p dist && find dist -type f '(' -name '*.js' -o -name '*.js.map' ')' -delete",
+    "clean:ts-cache": "rm -f node_modules/.tmp/*.tsbuildinfo",
+    "clean:types": "npm run clean:ts-cache && mkdir -p dist && find dist -type f '(' -name '*.d.ts' -o -name '*.d.ts.map' ')' -delete",
     "----BUNDLE": "",
-    "prebuild:code": "npm run clear:dist",
+    "prebuild:code": "npm run clean:dist",
     "build:code": "swc src -d dist --strip-leading-paths",
-    "prebuild:types": "npm run clear:ts-cache",
+    "prebuild:types": "npm run clean:types",
     "build:types": "tsc --declaration --emitDeclarationOnly --project ./.tsconfig/code.json",
     "build": "npm run build:code && npm run build:types",
     "----CODE-QA": "",
@@ -94,23 +95,20 @@
     "coverage": "c8 --100 --exclude='src/**/*.test.ts' npm run test:code",
     "unit-test": "npm run test:code",
     "type-test": "npm run test:types",
-    "watch:unit-test": "TSX_TSCONFIG_PATH=.tsconfig/tests.json node --import tsx --watch --test 'src/**/*.test.ts'",
-    "----PUBLISH": "",
-    "release": "semantic-release"
+    "watch:unit-test": "TSX_TSCONFIG_PATH=.tsconfig/tests.json node --import tsx --watch --test 'src/**/*.test.ts'"
   },
   "dependencies": {},
   "devDependencies": {
     "@asd14/eslint-config": "^15.4.0",
     "@asd14/eslint-plugin": "^3.3.0",
     "@asd14/prettier-config": "^1.4.0",
+    "@asd14/semantic-release-config": "^1.1.0",
     "@asd14/ts-config": "^1.5.0",
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
-    "@semantic-release/git": "^10.0.1",
     "@swc/cli": "^0.8.1",
     "@swc/core": "^1.15.41",
     "c8": "^11.0.0",
-    "conventional-changelog-conventionalcommits": "^9.3.1",
     "eslint": "^9.39.2",
     "prettier": "^3.8.4",
     "semantic-release": "^25.0.5",
@@ -120,6 +118,6 @@
   },
   "peerDependencies": {},
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22"
   }
 }
